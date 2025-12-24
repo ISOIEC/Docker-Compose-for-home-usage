@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ./homarr/appdata:/appdata #you path
+      - /opt/app/homarr:/appdata #you path
     environment:
       - SECRET_ENCRYPTION_KEY=key # You can generate one yourself using openssl rand -hex 3
     ports:
