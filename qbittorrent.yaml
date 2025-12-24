@@ -1,0 +1,21 @@
+---
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=RU
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /opt/app/qbittorrent:/config
+      - /mnt/TrueNAS:/downloads #точка монитрования для общей загузки, подключено внешнее хранилище
+      - /mnt/TrueNAS/tv:/downloads/tv #точка монитрования для сериалов, подключено внешнее хранилище. Сделано для настройки категорий
+      - /mnt/TrueNAS/movies:/downloads/movies #точка монитрования для фильмов, подключено внешнее хранилище. Сделано для настройки категорий 
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
