@@ -1,0 +1,16 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=RU
+      - VERSION=docker
+     # - PLEX_CLAIM= #optional
+    volumes:
+      - /opt/app/Plex/:/config
+      - /mnt/TrueNAS/tv:/mnt/TrueNAS/tv #точка монитрования для сериалов подключено внешнее хранилище
+      - /mnt/TrueNAS/movies:/mnt/TrueNAS/movies #точка монитрования для фильмов подключено внешнее хранилище
+    restart: unless-stopped
